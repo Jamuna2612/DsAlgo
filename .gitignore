@@ -1,0 +1,26 @@
+# IntelliJ specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Compiled files
+/out/
+/target/
+
+# Dependency directories
+/lib/
+/bin/
+/build/
+
+# Compiled Java classes
+*.class
+
+# Log files
+*.log
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
