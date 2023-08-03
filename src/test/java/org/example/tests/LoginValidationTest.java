@@ -22,8 +22,10 @@ public class LoginValidationTest extends BaseTest {
 
         loginPage.loginDataClick(userName, pswd);
         IntroPage introPage = loginPage.submit();
-        introPage.signOutClick();
+        String logInMessage = loginPage.signInMessage();
+        Assert.assertEquals(logInMessage, "You are logged in");
 
+        introPage.signOutClick();
         String actualMessage = introPage.signOutMessage();
         Assert.assertEquals(actualMessage, "Logged out successfully");
     }

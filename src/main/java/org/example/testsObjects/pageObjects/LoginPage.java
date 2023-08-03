@@ -22,6 +22,12 @@ public class LoginPage {
     @FindBy(xpath = "//input[@value ='Login']")
     WebElement login;
 
+    @FindBy(xpath = "//div[contains(text(),'You are logged in')]")
+    WebElement loginMessage;
+
+    @FindBy(xpath = "//div[contains(text(),'Invalid Username and Password')]")
+    WebElement errorLoginMsg;
+
     public void loginDataClick(String uname,String pswd){
         userName.sendKeys(uname);
         pwd.sendKeys(pswd);
@@ -30,5 +36,14 @@ public class LoginPage {
     public IntroPage submit(){
         login.click();
         return new IntroPage(driver);
+    }
+    public String signInMessage(){
+        String loginText = loginMessage.getText();
+        return loginText;
+    }
+
+    public String errorMsg(){
+        String emsg= errorLoginMsg.getText();
+        return emsg;
     }
 }

@@ -40,7 +40,7 @@ public class RegistrationValidationTest2 extends BaseTest {
 
     @DataProvider
     public Object[][] registerData() {
-        return new Object[][]{{"gertilsa1", "1jungle@43!@@#!221", "1jungle@43!@@#!221"}};
+        return new Object[][]{{"gertilsa13", "1jungle@43!@@#!221!@", "1jungle@43!@@#!221!@"}};
 
     }
 }
