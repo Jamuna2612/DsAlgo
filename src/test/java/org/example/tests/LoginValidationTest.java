@@ -43,7 +43,7 @@ public class LoginValidationTest extends BaseTest {
         IntroPage introPage = loginPage.submit();
 
         String actualMessage = introPage.signOutErrorMessage();
-        Assert.assertEquals(actualMessage, "Invalid Username and Password");
+        Assert.assertEquals(actualMessage, "Invali Username and Password");
     }
 
     @DataProvider
