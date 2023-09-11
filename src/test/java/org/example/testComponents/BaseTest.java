@@ -28,12 +28,12 @@ public class BaseTest {
         properties.load(fis);
         String browserValue = System.getProperty("browser")!=null ? System.getProperty("browser"): properties.getProperty("browser");
         if (browserValue.equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "D:\\Jamuna\\software\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\jamun\\IdeaProjects\\Practice\\src\\test\\resources\\chromedriver.exe");
             driver = new ChromeDriver();
         }
         else if (browserValue.equals("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "D:\\Jamuna\\software\\geckodriver.exe");
-            driver = new FirefoxDriver();
+            System.setProperty("webdriver.gecko.driver", "C:\\Users\\jamun\\IdeaProjects\\Practice\\src\\test\\resources\\geckodriver.exe");
+            WebDriver driver = new FirefoxDriver();
         }
         else if (browserValue.equals("ie")) {
         /*System.setProperty("webdriver.gecko.driver", "D:\\Jamuna\\software\\geckodriver.exe");
