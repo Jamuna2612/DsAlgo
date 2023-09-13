@@ -29,18 +29,20 @@ public class Listeners extends BaseTest implements ITestListener {
     }
 
     public void onTestFailure(ITestResult result) {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            try {
-                TakesScreenshot ts = (TakesScreenshot) driver;
-                File source = ts.getScreenshotAs(OutputType.FILE);
-            //    File file = new File(System.getProperty("user.dir") + "\\reports\\" + result.getMethod().getMethodName()+ ".png");
-                FileUtils.copyFile(source, new File(System.getProperty("user.dir") + "\\reports\\" + result.getMethod().getMethodName()+ ".png"));
-                System.out.println("Successfully captured a screenshot");
-            } catch (Exception e) {
-                System.out.println("Exception while taking screenshot " + e.getMessage());
-            }
+        extentTest.log(Status.FAIL, "Test Failed");
+        try {
+            driver = (WebDriver) result.getTestClass().getRealClass().getField("driver")
+                    .get(result.getInstance());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
 
+        String filePath = null;
+        try {
+            filePath = getScreenshot(result.getMethod().getMethodName(), driver);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
