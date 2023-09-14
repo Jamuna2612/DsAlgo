@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="All Test Suite">
     <listeners>
         <listener class-name="org.example.testComponents.Listeners"></listener>
     </listeners>
-
-    <test thread-count="5" name="RegistrationValidationTest">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/LoginValidationTest.java">
         <classes>
-            <class name="org.example.tests.RegistrationValidationTest2"></class>
+            <class name="org.example.tests.LoginValidationTest">
+                <methods>
+                    <include name="positiveLoginValidationTest"/>
+                    <include name="negativeLoginValidationTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
-
-    <test thread-count="5" name="RegistrationErrorValidationTest">
+    <!--<test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
         <classes>
-            <class name="org.example.tests.RegistrationErrorValidationTest"></class>
+            <class name="org.example.tests.RegistrationErrorValidationTest">
+                <methods>
+                    <include name="registrationErrorValidationWithNumericValue"/>
+                    <include name="registrationErrorWithAlphaNumeric"/>
+                </methods>
+            </class>
         </classes>
-    </test>
-
-    <test thread-count="5" name="loginValidationTest">
-        <classes>
-            <class name="org.example.tests.LoginValidationTest"></class>
-        </classes>
-    </test>
-
-</suite> <!-- Suite -->
+    </test>-->
+</suite>

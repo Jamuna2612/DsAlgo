@@ -7,11 +7,15 @@ import org.example.testsObjects.pageObjects.WelcomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+
+
 public class LoginValidationTest extends BaseTest {
+
     @Test(dataProvider = "positiveLoginData")
     public void positiveLoginValidationTest(String userName, String pswd) throws IOException, InterruptedException {
 
