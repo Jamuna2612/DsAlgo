@@ -12,31 +12,78 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class RegistrationValidationTest2 extends BaseTest {
+public class RegistrationValidationTest extends BaseTest {
 
-    @Test(dataProvider = "registerData")
-    public void registerValidation(String username, String password, String reTypePassword) throws IOException, InterruptedException {
-
-
+    @Test
+    public void registerValidation() throws IOException, InterruptedException {
         WebDriver driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
+        
         welcomePage.click();
-        RegisterPage loginPage = welcomePage.registerClick();
-        Thread.sleep(1000);
+        RegisterPage registerPage = welcomePage.registerClick();
+        
+        // username field displayed on webpage
+        if (registerPage.waitForElementDisplayed("username")) {
+        	// generate username with length of 6 chars
+        	registerPage.generateUsername(4, "startWithLowerLetters");
+        	
+        	// generate password
+        	registerPage.generatePassword(8, "alphanumeric");
 
-        loginPage.login(username, password, reTypePassword);
-        IntroPage introPage = loginPage.submitClick();
-        Thread.sleep(2000);
-
-        introPage.clickDsElement();
-        Thread.sleep(2000);
-        introPage.clickTreeElement();
-        introPage.signOutClick();
+        	registerPage.inputCredentials();
+            IntroPage introPage = registerPage.submitClick();
+            if (introPage.waitForElementDisplayed("alertDataMessage")) {
+            	String msg = introPage.getAlertDataMessage();
+            	if (msg.contains("New Account Created")) {
+            		System.out.println("Verified message: " + msg);
+                	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is successful");
+                    introPage.signOutClick();
+            	}
+            }else {
+            	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is FAILED");
+            }
+        }
 
         String actual = driver.findElement(By.xpath("//div[contains(text(),'Logged')]")).getText();
         Assert.assertEquals(actual, "Logged out successfully");
         driver.close();
     }
+    
+    @Test(dataProvider = "registerData")
+    public void registerValidationWithDataProvider(String username, String password, String retypePassword) throws IOException, InterruptedException {
+        WebDriver driver = initializeDriver();
+        WelcomePage welcomePage = new WelcomePage(driver);
+        
+        welcomePage.click();
+        RegisterPage registerPage = welcomePage.registerClick();
+        
+        // username field displayed on webpage
+        if (registerPage.waitForElementDisplayed("username")) {
+        	System.out.println("Username: " + username + " Password: " + password + " Retypepassword: " + retypePassword);
+        	
+        	// set user provided username password
+        	registerPage.setUserName(username);
+        	registerPage.setPassword(password);
+        	registerPage.setRetypePassword(retypePassword);
+        	
+        	registerPage.inputCredentials();
+            IntroPage introPage = registerPage.submitClick();
+            if (introPage.waitForElementDisplayed("alertDataMessage")) {
+            	String msg = introPage.getAlertDataMessage();
+            	if (msg.contains("New Account Created")) {
+            		System.out.println("Verified message: " + msg);
+                	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is successful");
+                    introPage.signOutClick();
+            	}
+            }else {
+            	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is FAILED");
+            }
+        }
+
+        String actual = driver.findElement(By.xpath("//div[contains(text(),'Logged')]")).getText();
+        Assert.assertEquals(actual, "Logged out successfully");
+        driver.close();
+    }    
 
     @DataProvider
     public Object[][] registerData() {
