@@ -8,13 +8,20 @@ import org.example.testsObjects.pageObjects.IntroPage;
 import org.example.testsObjects.pageObjects.LoginPage;
 import org.example.testsObjects.pageObjects.RegisterPage;
 import org.example.testsObjects.pageObjects.WelcomePage;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.Random;
 
 public class StepDefinitionImpl extends BaseTest {
 
@@ -64,13 +71,45 @@ public class StepDefinitionImpl extends BaseTest {
     	registerPage = welcomePage.registerClick();    	
     }    
     
-    @Given("User enters {string} with {string} and {string}")
-    public void inputCredentials(String userNameType, String passwordType, String usernameLength) {
-    	System.out.println("UsernameType: " + userNameType + " passwordType: " + passwordType + " userNameLength: " + usernameLength);
-    	registerPage.generateUsername(Integer.parseInt(usernameLength), userNameType);
-    	registerPage.generatePassword(8, passwordType);
-    	registerPage.inputCredentials();
+    @Given("User request to create {string} username")
+    public void generateUsernameForGivenType(String userNameType) {
+
+    	if (userNameType.toLowerCase().contains("empty")) {
+    		registerPage.setUserName("");
+    	}else {
+        	// default username length to be created  is 8 char log
+        	int length = 8;
+        	// when user requests 151_alphabets length (in error test), we pass requested length as 151 instead of 8
+        	if (userNameType.toLowerCase().contains("151_alphabets")) {
+        		length = 151;
+        	}
+        	registerPage.generateUsername(length, userNameType);
+    	}
     }
+
+    @Given("User request to create {string} password")
+    public void generatePasswordForGivenType(String passwordType) {
+    	if (passwordType.toLowerCase().contains("emptypassword")) {
+    		registerPage.setPassword("");
+    	}else if (passwordType.toLowerCase().contains("emptyretypepassword")) {
+    		registerPage.setRetypePassword("");
+    	}else if (passwordType.toLowerCase().contains("shortlength")) {
+    		Random random = new Random();
+    		// valid password is min 8 char long so choosing invalid char length from 1 to 7
+    		// can't take 0, as it is empty password usercase, which is separate test case
+    		int length = random.nextInt(1,7);
+    		registerPage.generatePassword(length, passwordType);
+    	}
+    	else {
+    		//default password length to be created is 8 char log
+    		registerPage.generatePassword(8, passwordType);
+    	}
+    }
+
+    @Given("User inputs credentials created")
+    public void inputCredentials() {
+    	registerPage.inputCredentials();
+    }    
 
     @When("User click submit button")
     public void submitRegistration() {
@@ -91,7 +130,7 @@ public class StepDefinitionImpl extends BaseTest {
         }
     }
     
-    @Then("I input {string}")
+	@Then("I input {string}")
     public void enterUserInput(String inputType) {
     	if (inputType.contains("username")) {
     		// generate username
@@ -99,18 +138,18 @@ public class StepDefinitionImpl extends BaseTest {
     	}
     	if (inputType.contains("password")) {
     		// generate password
-    		registerPage.generatePassword(8, "default");
+    		registerPage.generatePassword(8, "repasswordempty");
     	}    	
 		registerPage.inputCredentials();
     }
     
     @Then("I verify registration failure {string}")
     public void validateRegistrationFailureMessage(String errorMsg) {
-    	String errorStr ; 
-    	// check if expected error message is from popup window
-    	// NOTE: //* returning all text from register page not catching pop up window
+    	String errorStr = "";
+    	// check if expected message contains string related to input field validation
+    	// If yes, then read active element validatioMessage to verify expected v/s actual message
     	if (errorMsg.contains("Please fill out")) {
-        	errorStr = registerPage.getPopUpWindowMessage();
+    		errorStr = registerPage.getActiveElementValidationMessage();
     	}
     	// else expected error message is from alert box
     	else {
@@ -123,12 +162,11 @@ public class StepDefinitionImpl extends BaseTest {
     	}else {
     		System.out.println("Expected error message: " + errorMsg); 
     		System.out.println("Actual error message: " + errorStr);
-    		System.out.println("Test Failed : DEFECT to be RAISED");
+    		// without below 2 lines of code, test will PASS even though expected and actual error messages are different
             ITestResult result = Reporter.getCurrentTestResult();
             result.setStatus(ITestResult.FAILURE);
     	}
     }
-    
     
     @Then("I close web driver")
     public void closeWebDriver() {

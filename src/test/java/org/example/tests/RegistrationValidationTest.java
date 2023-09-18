@@ -25,10 +25,10 @@ public class RegistrationValidationTest extends BaseTest {
         // username field displayed on webpage
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(4, "startWithLowerLetters");
+        	registerPage.generateUsername(4, "alphabetsOnly");
         	
         	// generate password
-        	registerPage.generatePassword(8, "alphanumeric");
+        	registerPage.generatePassword(8, "alphanumbericSpecialChars");
 
         	registerPage.inputCredentials();
             IntroPage introPage = registerPage.submitClick();
@@ -74,20 +74,25 @@ public class RegistrationValidationTest extends BaseTest {
             		System.out.println("Verified message: " + msg);
                 	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is successful");
                     introPage.signOutClick();
+                    
+                    String actual = driver.findElement(By.xpath("//div[contains(text(),'Logged')]")).getText();
+                    Assert.assertEquals(actual, "Logged out successfully");
+            	}else {
+            		System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + " FAILED");
+            		System.out.println("Error message: " + msg);
             	}
+            	
             }else {
-            	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is FAILED");
+            	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + " FAILED");
+            	System.out.println("Error message dialog not displayed on page");
             }
         }
-
-        String actual = driver.findElement(By.xpath("//div[contains(text(),'Logged')]")).getText();
-        Assert.assertEquals(actual, "Logged out successfully");
         driver.close();
     }    
 
     @DataProvider
     public Object[][] registerData() {
-        return new Object[][]{{"Camilinser", "1e@43!@@#!221!@242", "1e@43!@@#!221!@242"}};
+        return new Object[][]{{"Camilinser", "asdf1234@@", "asdf1234@@"}};
 
     }
 }

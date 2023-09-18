@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
 				 plugin ={"html:target/cucumber.html"},
 				 features = "src/test/java/org/example/cucumber",
 				 glue = "org.example.stepDefinitions",
-				 tags = "@lowercaseUsernameRegister")
+				 tags = "@registrationSuccessTests")
 
 public class RegisterTestRunner extends AbstractTestNGCucumberTests {
 	@Override

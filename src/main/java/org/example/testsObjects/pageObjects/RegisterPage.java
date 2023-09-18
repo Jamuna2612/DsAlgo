@@ -81,15 +81,6 @@ public class RegisterPage {
 		return message;
 	}
 	
-	// Note: Tried to get pop up window message with below, but could not get it
-	public String getPopUpWindowMessage() {
-		WebElement messageElement = waitAndGetElement(By.xpath("//*"));
-		if (messageElement != null) {
-			return messageElement.getText();
-		}
-		return "";
-	}
-	
 	// This function waits for element to be clickable and return once element is available
 	// This is useful function to avoid Thread.sleep in the code
 	public boolean waitForElementDisplayed(String elementStr) {
@@ -137,94 +128,67 @@ public class RegisterPage {
 		else {
 			rePasswordStr = tempPassword;
 		}
-	}	
+	}
+	
+	// Function switches to active element and returns validation message for that element
+	public String getActiveElementValidationMessage() {
+		WebElement activeElement = driver.switchTo().activeElement();
+		return  activeElement.getAttribute("validationMessage");
+	}
 
 	// This function generates username using length and username type
 	public void generateUsername(int length, String type) {
-	     String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-    	 String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		 String validSpecialChars = "@/./+/-/_";
-		 String invalidChars = "#$%^&*";
-         String numbers = "0123456789";
-	     String combinedCharsRange = "" ; 
-	     Random random = new Random();
-	     char[] usernameStr = new char[length];
+		String alphabets =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String allowedSpecialChars = "@/./+/-/_";
+		String notAllowedSpecialChars = "#$%^&*";
+        String numbers = "0123456789";
+	    String combinedCharsRange = "" ; 
+	    Random random = new Random();
+	    char[] usernameStr = new char[length];
 	     
-	     if (type.toLowerCase().contains("lowercase")) {
-	    	 combinedCharsRange = lowerCaseLetters;
-	     }
-	     else if (type.toLowerCase().contains("uppercase")) {
-	    	 combinedCharsRange = upperCaseLetters;
-	     }
-	     else if (type.toLowerCase().contains("numbers")) {
-	    	 combinedCharsRange = numbers;
-	     }
-	     else if (type.toLowerCase().contains("invalidchars")) {
-	    	 combinedCharsRange = invalidChars;
-	     }
-	     else if (type.toLowerCase().contains("validspecialchars")) {
-	    	 combinedCharsRange = validSpecialChars;
-	     }
-	     else if (type.toLowerCase().contains("mixedalphabets")) {
-	    	 combinedCharsRange = lowerCaseLetters + upperCaseLetters;
-	     }
-	     else if (type.toLowerCase().contains("alphanumeric")) {
-	    	 combinedCharsRange = lowerCaseLetters + upperCaseLetters + numbers;
-	     }
-	     else if (type.toLowerCase().contains("alphanumericspecialchar")) {
-	    	 combinedCharsRange = lowerCaseLetters + upperCaseLetters + numbers + validSpecialChars;
-	     }
-	     else { // default
-	    	 combinedCharsRange = lowerCaseLetters + upperCaseLetters + numbers + validSpecialChars;
-	     }
+	    if (type.toLowerCase().contains("alphabetsonly")) {
+	    	combinedCharsRange = alphabets;
+	    }
+	    else if (type.toLowerCase().contains("alphanumeric")) {
+	    	 combinedCharsRange = alphabets + numbers;
+	    }
+	    else if (type.toLowerCase().contains("allowedspecialchars")) {
+	    	combinedCharsRange = alphabets + allowedSpecialChars;
+	    }
+	    else if (type.toLowerCase().contains("invalidspecialchars")) {
+	    	combinedCharsRange = notAllowedSpecialChars;
+	    }
+	    else if (type.toLowerCase().contains("151_alphabets")) {
+	    	combinedCharsRange = alphabets;
+	    }
+	    else { // default
+	    	combinedCharsRange = alphabets;
+	    }
 	     
-		 for ( int i=0; i<length; i++) {
-			 usernameStr[i] = combinedCharsRange.charAt(random.nextInt(combinedCharsRange.length()));
-		  }
+		for ( int i=0; i<length; i++) {
+			usernameStr[i] = combinedCharsRange.charAt(random.nextInt(combinedCharsRange.length()));
+		}
  
-		 // convert username string to String so that numbers, special chars remain as is
-		 userNameStr = new String(usernameStr);
+		// convert username string to String so that numbers, special chars remain as is
+		userNameStr = new String(usernameStr);
     }
     
 	// This function generates password using length and password type
     public void generatePassword(int length, String type) {
-        String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+        String alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String specialChars = "!@#$";
         String numbers = "0123456789";
         String combinedCharsRange = "" ; 
         Random random = new Random();
         char[] password = new char[length];
         
-        if (type.toLowerCase().contains("alphabets")) {
-        	combinedCharsRange = upperCaseLetters + lowerCaseLetters;
+        if (type.toLowerCase().contains("alphanumbericSpecialChars")) {
+        	combinedCharsRange = alphabets + numbers + specialChars;        	
         }
-        else if (type.toLowerCase().contains("alphanumeric")) {
-        	combinedCharsRange = upperCaseLetters + lowerCaseLetters + numbers;        	
-        }
-        else if (type.toLowerCase().contains("numeric")) {
+        else if (type.toLowerCase().contains("numbers")) {
         	combinedCharsRange = numbers;        	
-        }
-        else if (type.toLowerCase().contains("specialcharnumbers")) {
-        	combinedCharsRange = specialChars + numbers;        	
-        }
-        else if (type.toLowerCase().contains("mixed")) {
-        	combinedCharsRange = specialChars + numbers + lowerCaseLetters + upperCaseLetters;        	
-        }
-        else if (type.toLowerCase().contains("mismatch")) {
-        	combinedCharsRange = upperCaseLetters + lowerCaseLetters + numbers;
-        }
-        else if (type.toLowerCase().contains("shortlength_")) {
-        	combinedCharsRange = upperCaseLetters + lowerCaseLetters + numbers;
-        	String[] parts = type.split("_");
-        	// parts[1] will have password length char
-        	// override password length with user requested length
-        	length =  Integer.parseInt(parts[1]);
-        }                
-        else { // default password
-        	System.out.println("requested password type: " + type + " is invalid, setting to default password");
-        	passwordStr = "1e@43!@@#!";
-        	rePasswordStr = "1e@43!@@#!";
+        }else {
+        	combinedCharsRange = alphabets + numbers + specialChars;
         }
         
         // generate password with combined range string        
@@ -233,9 +197,10 @@ public class RegisterPage {
     	}        
         passwordStr = new String(password);
         // In case of password type as mismatch, put non matching value for rePasswordStr
-        if (type.toLowerCase().contains("mismatch")) {
+        if (type.toLowerCase().contains("passwordmismatch")) {
         	rePasswordStr = "dummy";
-        }else {
+        }
+        else {
             rePasswordStr = passwordStr; 
         }
     }
