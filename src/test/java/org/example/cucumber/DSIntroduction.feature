@@ -1,4 +1,3 @@
-@DSIntro
 Feature: Validation of DataStructure Introduction
 
   Background: User explores the Data Structures Introduction Page
@@ -11,7 +10,7 @@ Feature: Validation of DataStructure Introduction
   Scenario Outline: User after sign in clicks on Get Started button of Data Structures and they should land in the Data Structures Introduction Page
     Given User is in the Home page
     When The user clicks on Sign In button
-    And User enters username <username> and password <password>
+    When User enters username <username> and password <password>
     And User clicks on login button
     And User clicks on Get Started button of Data Structure
     Then The user should land in Data Structures Introduction Page

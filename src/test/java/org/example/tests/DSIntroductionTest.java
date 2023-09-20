@@ -72,7 +72,8 @@ public class DSIntroductionTest extends BaseTest {
 
     @Test(dataProvider = "loginData")
     public void verify_user_LandedTo_DSIntroductionPage_After_ClickedOn_GetStartedLink(String userName, String password) throws IOException, InterruptedException, AWTException {
-        WebDriver driver = initializeDriver();
+        initializeDriver();
+        //WebDriver driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage.click();
         LoginPage loginPage = welcomePage.login();
