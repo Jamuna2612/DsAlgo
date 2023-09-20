@@ -7,16 +7,19 @@ import org.example.testsObjects.pageObjects.WelcomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 public class RegistrationValidationTest extends BaseTest {
+	
+	WebDriver driver;
 
     @Test
     public void registerValidation() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -51,7 +54,7 @@ public class RegistrationValidationTest extends BaseTest {
     
     @Test(dataProvider = "registerData")
     public void registerValidationWithDataProvider(String username, String password, String retypePassword) throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -88,8 +91,8 @@ public class RegistrationValidationTest extends BaseTest {
             }
         }
         driver.close();
-    }    
-
+    }
+    
     @DataProvider
     public Object[][] registerData() {
         return new Object[][]{{"Camilinser", "asdf1234@@", "asdf1234@@"}};

@@ -6,10 +6,10 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(monochrome = true,
-				 plugin ={"html:target/cucumber.html"},
+				 plugin ={"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
 				 features = "src/test/java/org/example/cucumber",
 				 glue = "org.example.stepDefinitions",
-				 tags = "@registrationSuccessTests")
+				 tags = "@registerTests")
 
 public class RegisterTestRunner extends AbstractTestNGCucumberTests {
 	@Override

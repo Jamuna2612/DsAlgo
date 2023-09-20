@@ -5,16 +5,18 @@ import org.example.testsObjects.pageObjects.RegisterPage;
 import org.example.testsObjects.pageObjects.WelcomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 public class RegistrationErrorValidationTest extends BaseTest {
 
+	WebDriver driver;
 
     @Test
-    public void registrationErrorValidationWithNumericValue() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+    public void numbersOnlyPasswordRegisterError() throws IOException, InterruptedException {
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -23,10 +25,10 @@ public class RegistrationErrorValidationTest extends BaseTest {
         // username field displayed on webpage
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(6, "startWithLowerLetters");
+        	registerPage.generateUsername(6, "alphabetsonly");
         	
         	// generate password
-        	registerPage.generatePassword(8, "numeric");
+        	registerPage.generatePassword(8, "numbers");
         	
         	registerPage.inputCredentials();
             registerPage.submitClick();
@@ -38,8 +40,8 @@ public class RegistrationErrorValidationTest extends BaseTest {
     }
 
     @Test
-    public void registrationErrorWithAlphaNumeric() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+    public void passwordMismatchRegisterError() throws IOException, InterruptedException {
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -48,10 +50,10 @@ public class RegistrationErrorValidationTest extends BaseTest {
         // username field displayed on web page
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(6, "startWithLowerLetters");
+        	registerPage.generateUsername(6, "alphabetsOnly");
         	
         	// generate password
-        	registerPage.generatePassword(8, "specialcharnumbers");
+        	registerPage.generatePassword(8, "passwordmismatch");
         	
         	registerPage.inputCredentials();
             registerPage.submitClick();
@@ -63,8 +65,8 @@ public class RegistrationErrorValidationTest extends BaseTest {
     }
     
     @Test
-    public void registrationErrorUserNameLength() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+    public void longUserNameRegisterError() throws IOException, InterruptedException {
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -73,10 +75,10 @@ public class RegistrationErrorValidationTest extends BaseTest {
         // username field displayed on web page
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(151, "startWithLowerLetters");
+        	registerPage.generateUsername(151, "alphabetsOnly");
         	
         	// generate password
-        	registerPage.generatePassword(8, "specialcharnumbers");
+        	registerPage.generatePassword(8, "alphanumbericSpecialChars");
         	
 
         	registerPage.inputCredentials();
@@ -92,8 +94,8 @@ public class RegistrationErrorValidationTest extends BaseTest {
     }    
     
     @Test
-    public void registrationErrorInvalidSpecialChar() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+    public void invalidSpecialCharUsernameRegisterError() throws IOException, InterruptedException {
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -102,10 +104,10 @@ public class RegistrationErrorValidationTest extends BaseTest {
         // username field displayed on web page
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(4, "containsInvalidSpecialChars");
+        	registerPage.generateUsername(4, "invalidspecialchars");
         	
         	// generate password
-        	registerPage.generatePassword(8, "alphanumeric");
+        	registerPage.generatePassword(8, "alphanumbericSpecialChars");
         	
         	registerPage.inputCredentials();
             registerPage.submitClick();
@@ -117,8 +119,8 @@ public class RegistrationErrorValidationTest extends BaseTest {
     }
     
     @Test
-    public void registrationErrorShortPasswordLength() throws IOException, InterruptedException {
-        WebDriver driver = initializeDriver();
+    public void shortPasswordRegisterError() throws IOException, InterruptedException {
+        driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         
         welcomePage.click();
@@ -127,13 +129,10 @@ public class RegistrationErrorValidationTest extends BaseTest {
         // username field displayed on web page
         if (registerPage.waitForElementDisplayed("username")) {
         	// generate username with length of 6 chars
-        	registerPage.generateUsername(4, "startWithLowerLetters");
+        	registerPage.generateUsername(4, "alphabetsonly");
         	
         	// generate password
-        	registerPage.generatePassword(5, "alphanumeric");
-        	
-        	// retype password
-        	registerPage.setRetypePassword("valid");
+        	registerPage.generatePassword(5, "alphanumbericSpecialChars");
         	
         	registerPage.inputCredentials();
             registerPage.submitClick();
@@ -142,7 +141,7 @@ public class RegistrationErrorValidationTest extends BaseTest {
             Assert.assertNotEquals(actualErrStr, "");
         }
         driver.close();
-    }     
+    }   
 }
 
 
