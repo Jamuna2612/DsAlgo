@@ -20,6 +20,27 @@ public class IntroPage {
     @FindBy(xpath = "//div/a[4]")
     WebElement treeStructure;
 
+    @FindBy(xpath = "//div/div[1]/div/div/a[text()='Get Started']")
+    public WebElement dsGetStartedLink;
+
+    @FindBy(xpath = "//div/div[2]/div/div/a[text()='Get Started']")
+    WebElement arrayGetStartedLink;
+
+    @FindBy(xpath = "//div/div[3]/div/div/a[text()='Get Started']")
+    WebElement linkedListGetStartedLink;
+
+    @FindBy(xpath = "//div/div[4]/div/div/a[text()='Get Started']")
+    WebElement stackGetStartedLink;
+
+    @FindBy(xpath = "//div/div[5]/div/div/a[text()='Get Started']")
+    WebElement queueGetStartedLink;
+
+    @FindBy(xpath = "//div/div[6]/div/div/a[text()='Get Started']")
+    WebElement treeGetStartedLink;
+
+    @FindBy(xpath = "//div/div[7]/div/div/a[text()='Get Started']")
+    WebElement graphGetStartedLink;
+
 
     @FindBy(xpath = "//ul/a[3]")
     WebElement signOut;
@@ -29,6 +50,14 @@ public class IntroPage {
 
     @FindBy(css = "div[class*='alert-primary']")
     WebElement invalidDataMessage;
+
+    public String getNotLoggedInMessage() {
+        String notLoginMessage = notLoggedInMessage.getText();
+        return notLoginMessage;
+    }
+
+    @FindBy(xpath = "//div[contains(text(),'You are not logged in')]")
+    WebElement notLoggedInMessage;
 
     public void clickDsElement(){
         dataStructure.click();
@@ -50,6 +79,15 @@ public class IntroPage {
     public String signOutErrorMessage(){
         String message = invalidDataMessage.getText();
         return message;
+    }
+
+    public String notLoggedInMessage(){
+        String message = notLoggedInMessage.getText();
+        return message;
+    }
+
+    public void elementClick() {
+        dsGetStartedLink.click();
     }
 
 

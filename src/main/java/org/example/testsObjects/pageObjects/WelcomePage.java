@@ -26,8 +26,9 @@ public class WelcomePage {
     public void goTo(){
         driver.get("https://dsportalapp.herokuapp.com/");
     }
-    public void click() throws InterruptedException {
+    public IntroPage click() throws InterruptedException {
         getStarted.click();
+        return new IntroPage(driver);
     }
 
     public LoginPage login(){
