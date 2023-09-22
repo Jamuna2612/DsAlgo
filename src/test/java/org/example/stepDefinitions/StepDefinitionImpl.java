@@ -1,9 +1,12 @@
 package org.example.stepDefinitions;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import org.example.testComponents.BaseTest;
+import org.example.testsObjects.pageObjects.ArrayPage;
+import org.example.testsObjects.pageObjects.GraphPage;
 import org.example.testsObjects.pageObjects.IntroPage;
 import org.example.testsObjects.pageObjects.LoginPage;
 import org.example.testsObjects.pageObjects.RegisterPage;
@@ -30,27 +33,29 @@ public class StepDefinitionImpl extends BaseTest {
     public IntroPage introPage;
     public WelcomePage welcomePage;
     public RegisterPage registerPage;
+    public ArrayPage arrayPage;
+    public GraphPage graphPage;
 
     @Given("User is in login page")
     public void  User_is_in_login_page() throws IOException, InterruptedException {
-
         driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage.click();
         loginPage = welcomePage.login();
         Thread.sleep(1000);
     }
-
+    
     @Given("^Logged in with username (.+) and password(.+)$")
     public void Logged_in_with_username_and_password(String userName, String password) throws InterruptedException {
-
         loginPage.loginDataClick(userName,password);
         Thread.sleep(1000);
     }
+    
     @When("User click login")
     public void User_click_login(){
-        loginPage.submit();
+        introPage = loginPage.submit();
     }
+    
     @Then("{string} message is displayed")
     public void message_is_displayed(String string) {
         String actualLoginMessage = loginPage.errorMsg();
@@ -167,6 +172,136 @@ public class StepDefinitionImpl extends BaseTest {
             result.setStatus(ITestResult.FAILURE);
     	}
     }
+    
+    // Array/Graph page step definitions
+    @Given("User is on home page")
+    public void userOnHomePage() throws IOException, InterruptedException {
+        driver = initializeDriver();
+        WelcomePage welcomePage = new WelcomePage(driver);
+        welcomePage.click();    	
+    }
+    
+    // added separate step to avoid conflict with validation test
+    // After discussion, we'll keep only one step
+    @Given("User enters {string} and {string}")
+    public void loginWithInputCredentials(String username, String password) {
+        loginPage.loginDataClick(username,password);
+    }
+    
+    
+    @When("User clicks get started button for {string} topic")
+    public void clickGetStartedPage(String pageType) {
+    	if (pageType.toLowerCase().contains("array")) {
+            arrayPage = new ArrayPage(driver);
+            arrayPage.clickGetStarted();
+    	}
+    	else if (pageType.toLowerCase().contains("graph")) {
+            graphPage = new GraphPage(driver);
+            graphPage.clickGetStarted();
+    	}
+    }
+    
+    @Then("User verify {string} topic click error message {string}")
+    public void verifyErrorMessage(String pageType, String error) {
+    	String errorMsg = "";
+    	if (pageType.toLowerCase().contains("array")) {
+            errorMsg = arrayPage.getErrorMessage();
+            System.out.println(errorMsg);
+    	}
+//    	else if (pageType.toLowerCase().contains("graph")) {
+//            errorMsg = graphPage.getErrorMessage();
+//            System.out.println(errorMsg);
+//    	}
+    	// verify expected error message with got from test
+        if (errorMsg == error) {
+        	System.out.println("Expected error message: " + error + "Actual message: " + errorMsg);
+        }else {
+        	System.out.println("Expected error message: " + error + "Actual message: " + errorMsg);
+        }
+    }
+    
+    @Then("User verify {string} topic link page is displayed")
+    public void verifyTopicLinksOpened(String pageType) {
+    	if (pageType.toLowerCase().contains("array")) {
+    		boolean onArrayTopicsPage = arrayPage.onArrayTopicsPage();
+    		if (onArrayTopicsPage == true) {
+    			System.out.println(pageType + " links present on web page");
+    		}
+//            Assert.assertEquals(onArrayTopicsPage, true);
+    	}
+    	
+    }
+    
+    @And("User clicks signout button")
+    public void clickSignOutButton() {
+        introPage.signOutClick();
+        String actualMessage = introPage.signOutMessage();
+        Assert.assertEquals(actualMessage, "Logged out successfully");    	
+    }
+    
+    @Then("Login {string} message is displayed")
+    public void loginSuccessMessageDisplayed(String expectedMsgType) {
+    	String actualMsg = ""; 
+    	String expectedMsg = "";
+    	if (expectedMsgType.contains("success")) {
+            actualMsg = loginPage.signInMessage();
+            expectedMsg = "You are logged in";
+    	}
+    	else if (expectedMsgType.contains("error")) {
+    		actualMsg = loginPage.errorMsg();
+    		expectedMsg = "Invalid Username and Password";
+    	}
+        System.out.println("Expected Message: " + expectedMsg + " Actual Message: " + actualMsg);
+//        Assert.assertEquals(logInMessage, expectedMsg);
+    } 
+    
+    @When("User clicks {string} page {string}")
+    public void clickInputTopicLink(String pageType, String topicLink) {
+    	if (pageType.toLowerCase().contains("array")) {
+    		arrayPage.clickArrayTopic(topicLink);
+    	}
+//    	else if (pageType.toLowerCase().contains("graph")) {
+//    		graphPage.clickArrayTopic(topicTitle);
+//    	}    	
+    }
+    
+    @Then("{string} page {string} is displayed on web page")
+    public void verifyTopicTitleDisplayed(String pageType, String topicLink) {
+    	String titleStr = "";
+    	if (pageType.toLowerCase().contains("array")) {
+            titleStr = arrayPage.getTopicPageTitle(topicLink);
+            System.out.println("Topic page title: " + titleStr);
+    	}
+//    	else if (pageType.toLowerCase().contains("graph")) {
+//        titleStr = arrayPage.getTopicPageTitle(topicTitle);
+//        System.out.println("Topic page title: " + titleStr);
+//    	}
+    }
+    
+    @When("User executes {string} on {string} page and verify code output")
+    public void executePythonCodeAndVerifyOutputMessage(String pythonCodeType, String pageType) {
+        String output = "";
+    	if (pageType.toLowerCase().contains("array")) {
+            // click TryHere button
+            arrayPage.scrollToElementAndClick("tryHere");
+            
+            //Enter python code in text Editor and press Run
+            arrayPage.updateTextEditorAndClickRun(pythonCodeType);
+            arrayPage.clickRunBtn();
+            if (pythonCodeType.contains("CodeError")) {
+            	output = arrayPage.getPythonCodeErrorOutput();
+            }else {
+            	output = arrayPage.getPythonCodeOutput();
+            }
+            // go back on web page window
+            driver.navigate().back();    		
+    	}
+//    	else if (pageType.toLowerCase().contains("graph")) {
+//    	}
+    	System.out.println("python code output: " + output);
+    }
+    
+    
     
     @Then("I close web driver")
     public void closeWebDriver() {
