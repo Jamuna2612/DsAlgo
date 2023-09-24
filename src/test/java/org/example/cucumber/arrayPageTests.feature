@@ -38,22 +38,22 @@ Feature: Array page test scenarios
     Then I close web driver
     
     @arrayTopic1SuccessOutput
-    Examples: Arrays in Python topic python code successful output
+    Examples: Arrays in Python topic link code run success
     | username | password | pythonCodeType    | topicLink        |
     | mike555  | Open4You | pythonCodeSuccess | Arrays in Python |
     
     @arrayTopic1ErrorOutput
-    Examples: Arrays in Python topic python code error output
+    Examples: Arrays in Python topic link code run error
     | username | password | pythonCodeType    | topicLink        |
     | mike555  | Open4You | pythonCodeError   | Arrays in Python | 
     
     @arrayTopic2SuccessOutput
-    Examples: Arrays Using List topic python code successful output
+    Examples: Arrays Using List topic link code run success
     | username | password | pythonCodeType    | topicLink         |
     | mike555  | Open4You | pythonCodeSuccess | Arrays Using List |
     
     @arrayTopic2ErrorOutput
-    Examples: Arrays Using List topic python code error output
+    Examples: Arrays Using List topic link with code run error
     | username | password | pythonCodeType    | topicLink         |
     | mike555  | Open4You | pythonCodeError   | Arrays Using List |     
      
