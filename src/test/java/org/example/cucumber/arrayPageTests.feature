@@ -2,7 +2,7 @@
 Feature: Array page test scenarios
   This feature contains array page tests 
 
-  @noLoginError
+  @arrayNoLoginError
   Scenario: Array page no login error
     Given User is on home page
     When User clicks get started button for "array" topic

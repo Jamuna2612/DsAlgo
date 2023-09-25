@@ -26,6 +26,8 @@ public class GraphValidationTest extends BaseTest {
         String errorMsg = graphPage.getErrorMessage();
         System.out.println(errorMsg);
         Assert.assertEquals(errorMsg, "You are not logged in");
+        driver.close();
+        driver.quit();        
 	}
 	
 	@Test(dataProvider = "userCredentialsData")
@@ -50,7 +52,9 @@ public class GraphValidationTest extends BaseTest {
         
         introPage.signOutClick();
         String actualMessage = introPage.signOutMessage();
-        Assert.assertEquals(actualMessage, "Logged out successfully");        
+        Assert.assertEquals(actualMessage, "Logged out successfully");
+        driver.close();
+        driver.quit();
 	}
 	
 	@Test(dataProvider = "testInputData")
@@ -98,7 +102,9 @@ public class GraphValidationTest extends BaseTest {
         
         introPage.signOutClick();
         String actualMessage = introPage.signOutMessage();
-        Assert.assertEquals(actualMessage, "Logged out successfully");        
+        Assert.assertEquals(actualMessage, "Logged out successfully");
+        driver.close();
+        driver.quit();
 	}
 	
     @DataProvider

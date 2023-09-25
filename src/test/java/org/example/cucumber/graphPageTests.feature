@@ -2,7 +2,7 @@
 Feature: Graph page test scenarios
   This feature contains graph page tests 
 
-  @noLoginError
+  @graphNoLoginError
   Scenario: Graph page no login error
     Given User is on home page
     When User clicks get started button for "graph" topic
