@@ -9,9 +9,9 @@ import io.cucumber.testng.CucumberOptions;
 				 plugin ={"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
 				 features = "src/test/java/org/example/cucumber",
 				 glue = "org.example.stepDefinitions",
-				 tags = "@arrayTests")
+				 tags = "@arrayNoLoginError")
 
-public class ArrayPageTestRunner extends AbstractTestNGCucumberTests {
+public class TestArrayPageRunner extends AbstractTestNGCucumberTests {
 	@Override
     @DataProvider(parallel = false)
     public Object[][] scenarios() {
