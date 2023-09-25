@@ -1,4 +1,7 @@
 package org.example.stepDefinitions;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.Status;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -305,9 +308,27 @@ public class StepDefinitionImpl extends BaseTest {
     
     @Then("I close web driver")
     public void closeWebDriver() {
+//    	if (driver != null) {
+//	    	driver.close();
+//	    	driver.quit();
+//    	}
+    }
+    
+    // @After will get called for every test scenario at the end of test
+    // Code logic is added to check scenario status and if failed, take screenshot of web page
+    @After
+    public void afterHook(Scenario scenario) throws IOException {
+    	System.out.println("Test status: " + scenario.getStatus());
+    	String scenarioName = scenario.getName();
+    	if (scenario.isFailed()) {
+    		// take screenshot
+    		String filePath = getScreenshot(scenarioName, driver);
+    		System.out.println("Screenshot for " + scenarioName + " is saved at: " + filePath);
+    	}
+    	
     	if (driver != null) {
 	    	driver.close();
 	    	driver.quit();
-    	}
+    	}    		
     }
 }
