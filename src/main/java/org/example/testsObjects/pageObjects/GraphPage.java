@@ -101,20 +101,6 @@ public class GraphPage {
 		runBtn.click();
 	}
 	
-	public String getPythonValidSyntaxOutput() {
-		pythonCodeOutput = waitAndGetElement(pythonCodeOutputPath);
-		return pythonCodeOutput.getText();
-	}
-	
-	public String getPythonSyntaxErrorOutput() {
-        Alert alert = driver.switchTo().alert();
-		String message = alert.getText();
-		
-		// press ok button on alert
-		alert.accept();
-		return message;
-	}
-	
 	public void clickArrayTopic(String topicLinkStr) {
 		scrollToElementAndClick(topicLinkStr);
 	}	

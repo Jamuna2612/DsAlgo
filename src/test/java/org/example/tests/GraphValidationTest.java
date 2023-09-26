@@ -91,9 +91,9 @@ public class GraphValidationTest extends BaseTest {
         graphPage.clickRunBtn();
         
         if (codeType.contains("SyntaxError")) {
-        	output = graphPage.getPythonSyntaxErrorOutput();
+        	output = graphPage.getPythonCodeErrorOutput();
         }else {
-        	output = graphPage.getPythonValidSyntaxOutput();
+        	output = graphPage.getPythonCodeOutput();
         }
     	System.out.println("python code output: " + output);
     	
@@ -110,10 +110,10 @@ public class GraphValidationTest extends BaseTest {
     @DataProvider
     public Object[][] testInputData() {
         return new Object[][]{
-        	{"mike555", "Open4You", "Graph", "pythonSyntaxError"},
-        	{"mike555", "Open4You", "Graph", "pythonValidSyntax"},
-        	{"mike555", "Open4You", "Graph Representations", "pythonValidSyntax"},
-        	{"mike555", "Open4You", "Graph Representations", "pythonSyntaxError"}
+        	{"mike555", "Open4You", "Graph", "pythonCodeError"},
+        	{"mike555", "Open4You", "Graph", "pythonCodeSuccess"},
+        	{"mike555", "Open4You", "Graph Representations", "pythonCodeSuccess"},
+        	{"mike555", "Open4You", "Graph Representations", "pythonCodeError"}
         	};
     }	
     
