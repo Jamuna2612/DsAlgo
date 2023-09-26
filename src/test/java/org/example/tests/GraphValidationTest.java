@@ -90,7 +90,7 @@ public class GraphValidationTest extends BaseTest {
         graphPage.updateTextEditorAndClickRun(codeType);
         graphPage.clickRunBtn();
         
-        if (codeType.contains("SyntaxError")) {
+        if (codeType.contains("CodeError")) {
         	output = graphPage.getPythonCodeErrorOutput();
         }else {
         	output = graphPage.getPythonCodeOutput();
