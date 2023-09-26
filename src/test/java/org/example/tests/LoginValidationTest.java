@@ -28,7 +28,6 @@ public class LoginValidationTest extends BaseTest {
         IntroPage introPage = loginPage.submit();
         String logInMessage = loginPage.signInMessage();
         Assert.assertEquals(logInMessage, "You are logged in");
-
         introPage.signOutClick();
         String actualMessage = introPage.signOutMessage();
         Assert.assertEquals(actualMessage, "Logged out successfully");
@@ -43,11 +42,30 @@ public class LoginValidationTest extends BaseTest {
         welcomePage.click();
         LoginPage loginPage = welcomePage.login();
 
-        loginPage.loginDataClick(userName, pswd);
+         loginPage.loginDataClick(userName, pswd);
         IntroPage introPage = loginPage.submit();
 
         String actualMessage = introPage.signOutErrorMessage();
         Assert.assertEquals(actualMessage, "Invalid Username and Password");
+    }
+
+    @Test(dataProvider = "positiveLoginData")
+    public void validatingClickOnLinkedList(String userName, String pswd) throws IOException, InterruptedException {
+
+        WebDriver driver = initializeDriver();
+        WelcomePage welcomePage = new WelcomePage(driver);
+        welcomePage.click();
+        LoginPage loginPage = welcomePage.login();
+
+        loginPage.loginDataClick(userName, pswd);
+        IntroPage introPage = loginPage.submit();
+
+        introPage.llClick();
+        introPage.introClick();
+
+        navigateBack(2);
+        introPage.treeClick();
+        introPage.signOutClick();
     }
 
     @DataProvider
