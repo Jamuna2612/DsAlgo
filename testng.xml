@@ -11,6 +11,7 @@
                 <methods>
                     <include name="positiveLoginValidationTest"/>
                     <include name="negativeLoginValidationTest"/>
+                    <include name="validatingClickOnLinkedList"/>
                 </methods>
             </class>
         </classes>

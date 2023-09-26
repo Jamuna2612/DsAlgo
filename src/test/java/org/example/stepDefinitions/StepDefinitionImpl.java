@@ -76,5 +76,6 @@ public class StepDefinitionImpl extends BaseTest {
     @And("click tree link")
     public void clickTreeLink() {
         introPage.treeClick();
+        driver.quit();
     }
 }
