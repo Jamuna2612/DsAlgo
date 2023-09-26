@@ -1,4 +1,3 @@
-@registrationSuccessTests
 @registerTests
 Feature: Successful registration tests
   This feature contains registration successful test scenarios 
@@ -14,7 +13,6 @@ Feature: Successful registration tests
     Given User inputs credentials created
     When User click submit button
     Then User registration is successful
-    Then I close web driver    
 
   @alphanumericUsername
   Scenario: Alphanumeric Username
@@ -23,7 +21,6 @@ Feature: Successful registration tests
     Given User inputs credentials created
     When User click submit button
     Then User registration is successful
-    Then I close web driver    
 
   @allowedSpecialChars
   Scenario: Allowed special char Username
@@ -32,4 +29,3 @@ Feature: Successful registration tests
     Given User inputs credentials created
     When User click submit button
     Then User registration is successful
-    Then I close web driver

@@ -1,4 +1,3 @@
-@registrationNegativeTests
 @registerTests
 Feature: Registration Negative Tests
   This feature contains registration validation and error scenarios test 
@@ -13,7 +12,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "Please fill out this field"
-    Then I close web driver
     
   @emptyPassword
   Scenario: Empty password
@@ -22,7 +20,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "Please fill out this field"
-    Then I close web driver
     
   @emptyRetypePassword
   Scenario: Empty retype password
@@ -32,7 +29,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "Please fill out this field"
-    Then I close web driver    
 
   @passwordMismatch
   Scenario: Password mismatch
@@ -41,7 +37,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "password_mismatch:The two password fields didn’t match."
-    Then I close web driver   
     
   @151CharactersUsername
   Scenario: 151 character username
@@ -51,7 +46,6 @@ Feature: Registration Negative Tests
     When User click submit button
     # Expected error message is missing from DS algo test scenario sheet. Adding one per username hint
     Then I verify registration failure "Username should be 150 characters or fewer"
-    Then I close web driver          
 
 
   @invalidSpecialCharUsername
@@ -61,8 +55,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "Please enter valid username"
-    Then I close web driver          
-
 
   @shortLengthPassword
   Scenario: Short Password
@@ -71,7 +63,6 @@ Feature: Registration Negative Tests
     Given User inputs credentials created
     When User click submit button
     Then I verify registration failure "Password should contain atleast 8 characters"
-    Then I close web driver
     
   @numbersOnlyPassword
   Scenario: Number only password
@@ -81,4 +72,3 @@ Feature: Registration Negative Tests
     When User click submit button
     # Expected error message is missing from DS algo test scenario sheet. Adding one per password hint
     Then I verify registration failure "Password can't be entirely numeric"
-    Then I close web driver

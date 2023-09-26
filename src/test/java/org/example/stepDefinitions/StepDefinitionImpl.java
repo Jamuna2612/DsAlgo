@@ -27,6 +27,8 @@ import org.testng.Reporter;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Random;
 
 public class StepDefinitionImpl extends BaseTest {
@@ -131,7 +133,6 @@ public class StepDefinitionImpl extends BaseTest {
         	if (msg.contains("New Account Created")) {
         		System.out.println("Verified message: " + msg);
             	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is successful");
-                introPage.signOutClick();
         	}
         }else {
         	System.out.println("Registration with username: " + registerPage.getUserName() + " and password: " + registerPage.getPassword() + "is FAILED");
@@ -211,15 +212,15 @@ public class StepDefinitionImpl extends BaseTest {
             errorMsg = arrayPage.getErrorMessage();
             System.out.println(errorMsg);
     	}
-//    	else if (pageType.toLowerCase().contains("graph")) {
-//            errorMsg = graphPage.getErrorMessage();
-//            System.out.println(errorMsg);
-//    	}
+    	else if (pageType.toLowerCase().contains("graph")) {
+            errorMsg = graphPage.getErrorMessage();
+            System.out.println(errorMsg);
+    	}
     	// verify expected error message with got from test
         if (errorMsg == error) {
-        	System.out.println("Expected error message: " + error + "Actual message: " + errorMsg);
+        	System.out.println("Expected error message: " + error + " Actual message: " + errorMsg);
         }else {
-        	System.out.println("Expected error message: " + error + "Actual message: " + errorMsg);
+        	System.out.println("Expected error message: " + error + " Actual message: " + errorMsg);
         }
     }
     
@@ -263,9 +264,9 @@ public class StepDefinitionImpl extends BaseTest {
     	if (pageType.toLowerCase().contains("array")) {
     		arrayPage.clickArrayTopic(topicLink);
     	}
-//    	else if (pageType.toLowerCase().contains("graph")) {
-//    		graphPage.clickArrayTopic(topicTitle);
-//    	}    	
+    	else if (pageType.toLowerCase().contains("graph")) {
+    		graphPage.clickArrayTopic(topicLink);
+    	}    	
     }
     
     @Then("{string} page {string} is displayed on web page")
@@ -275,10 +276,10 @@ public class StepDefinitionImpl extends BaseTest {
             titleStr = arrayPage.getTopicPageTitle(topicLink);
             System.out.println("Topic page title: " + titleStr);
     	}
-//    	else if (pageType.toLowerCase().contains("graph")) {
-//        titleStr = arrayPage.getTopicPageTitle(topicTitle);
-//        System.out.println("Topic page title: " + titleStr);
-//    	}
+    	else if (pageType.toLowerCase().contains("graph")) {
+    		titleStr = graphPage.getTopicPageTitle(topicLink);
+    		System.out.println("Topic page title: " + titleStr);
+    	}
     }
     
     @When("User executes {string} on {string} page and verify code output")
@@ -296,18 +297,26 @@ public class StepDefinitionImpl extends BaseTest {
             }else {
             	output = arrayPage.getPythonCodeOutput();
             }
-            // go back on web page window
-            driver.navigate().back();    		
     	}
-//    	else if (pageType.toLowerCase().contains("graph")) {
-//    	}
+    	else if (pageType.toLowerCase().contains("graph")) {
+            // click TryHere button
+            graphPage.scrollToElementAndClick("tryHere");
+            
+            //Enter python code in text Editor and press Run
+            graphPage.updateTextEditorAndClickRun(pythonCodeType);
+            graphPage.clickRunBtn();
+            if (pythonCodeType.contains("CodeError")) {
+            	output = graphPage.getPythonCodeErrorOutput();
+            }else {
+            	output = graphPage.getPythonCodeOutput();
+            }    		
+    	}
     	System.out.println("python code output: " + output);
     }
     
-    
-    
     @Then("I close web driver")
     public void closeWebDriver() {
+    	// Commented below code as it is written in @After function
 //    	if (driver != null) {
 //	    	driver.close();
 //	    	driver.quit();
@@ -317,18 +326,28 @@ public class StepDefinitionImpl extends BaseTest {
     // @After will get called for every test scenario at the end of test
     // Code logic is added to check scenario status and if failed, take screenshot of web page
     @After
-    public void afterHook(Scenario scenario) throws IOException {
-    	System.out.println("Test status: " + scenario.getStatus());
+    public void afterTest(Scenario scenario) throws IOException {
+    	//System.out.println("Test status: " + scenario.getStatus());
     	String scenarioName = scenario.getName();
-    	if (scenario.isFailed()) {
-    		// take screenshot
-    		String filePath = getScreenshot(scenarioName, driver);
-    		System.out.println("Screenshot for " + scenarioName + " is saved at: " + filePath);
+    	Collection<String> tags = scenario.getSourceTagNames();
+    	String fileName = "";
+    	
+    	Iterator<String> iterator = tags.iterator();
+    	while (iterator.hasNext()) {
+    	    fileName += iterator.next(); //.replaceAll("@", "");
     	}
     	
+    	// making filename unique for scenario outline using executed scenario line# 
+    	if (scenario.isFailed()) {
+    		// take screenshot
+    		String filePath = getScreenshot(fileName, driver);
+    		System.out.println("Screenshot for " + scenarioName + " is saved at: " + filePath);
+    	}
     	if (driver != null) {
 	    	driver.close();
 	    	driver.quit();
-    	}    		
+    	}
+    	
+    	 		
     }
 }

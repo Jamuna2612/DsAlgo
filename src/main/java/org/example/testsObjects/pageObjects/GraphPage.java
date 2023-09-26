@@ -62,10 +62,10 @@ public class GraphPage {
 	
 	public String getTopicPageTitle(String topic) {
 		String xpathStr = "";
-		if (topic == "Graph") {
+		if (topic.contains("Graph")) {
 			xpathStr = "//div[@class='col-sm']//strong//p[@class='bg-secondary text-white']"; 
 		}
-		else if (topic == "Graph Representations") {
+		else if (topic.contains("Graph Representations")) {
 			xpathStr = "//p[@class='bg-secondary text-white' and text()='Graph Representations']";
 		}
 		By element = By.xpath(xpathStr);
@@ -115,9 +115,26 @@ public class GraphPage {
 		return message;
 	}
 	
+	public void clickArrayTopic(String topicLinkStr) {
+		scrollToElementAndClick(topicLinkStr);
+	}	
+	
+	public String getPythonCodeOutput() {
+		pythonCodeOutput = waitAndGetElement(pythonCodeOutputPath);
+		return pythonCodeOutput.getText();
+	}
+	
+	public String getPythonCodeErrorOutput() {
+        Alert alert = driver.switchTo().alert();
+		String message = alert.getText();
+		// press ok button on alert
+		alert.accept();
+		return message;
+	}	
+	
 	public void updateTextEditorAndClickRun(String codeType) {
 		String command = "print";
-		if (codeType.contains("SyntaxError")) {
+		if (codeType.contains("CodeError")) {
 			command = "Print";
 		}
 		// get text editor element
@@ -139,7 +156,7 @@ public class GraphPage {
 	// This function waits for element to be clickable and return once element is available
 	// This is useful function to avoid Thread.sleep in the code
 	public boolean waitForElementDisplayed(By element) {
-	  WebElement testElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(element));
+	  WebElement testElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(element));
 	  if (testElement.isDisplayed()) {
 	    return true;
 	  }    	
@@ -153,6 +170,13 @@ public class GraphPage {
     	if (str == "tryHere") {
     		element = tryHerePath;
     	}
+    	else if (str.contains("Graph")) {
+    		element = graphTopicPath;			
+		}
+		else if (str.contains("Graph Representations")) {
+			element = graphRepresentationsTopicPath;
+		}
+    	
         WebElement testElement = driver.findElement(element);                
         JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("arguments[0].scrollIntoView()", testElement); 
