@@ -1,11 +1,13 @@
 package org.example.testComponents;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +31,7 @@ public class BaseTest {
             driver = new ChromeDriver();
         } else if (browserValue.equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", "C:\\Users\\jamun\\IdeaProjects\\Practice\\src\\test\\resources\\geckodriver.exe");
-            WebDriver driver = new FirefoxDriver();
+            driver = new FirefoxDriver();
         } else if (browserValue.equals("ie")) {
         /*System.setProperty("webdriver.gecko.driver", "D:\\Jamuna\\software\\geckodriver.exe");
         driver = new ChromeDriver();*/
@@ -40,15 +42,6 @@ public class BaseTest {
         return driver;
     }
 
-/*
-    @BeforeTest
-    public WelcomePage launchApplication() throws IOException {
-        driver = initializeDriver();
-        WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.goTo();
-        return welcomePage;
-    }
-*/
 
     public String getScreenshot(String testcaseName, WebDriver driver) throws IOException {
 
@@ -57,7 +50,17 @@ public class BaseTest {
         File file = new File(System.getProperty("user.dir")+ "//reports//"+ testcaseName+".png");
         FileUtils.copyFile(source,file);
         return System.getProperty("user.dir")+ "//reports//"+ testcaseName+".png";
+    }
 
+    public void actionMethod(){
+        Actions action = new Actions(driver);
+        action.keyDown(Keys.ENTER).sendKeys("print").sendKeys(Keys.SPACE).sendKeys("\"Hello\"").sendKeys(Keys.ENTER).perform();
+
+    }
+    public void navigateBack(int noOfTimes){
+        for (int i = 0; i < noOfTimes; i++) {
+            driver.navigate().back();
+        }
     }
 }
 

@@ -11,19 +11,9 @@
                 <methods>
                     <include name="positiveLoginValidationTest"/>
                     <include name="negativeLoginValidationTest"/>
+                    <include name="validatingClickOnLinkedList"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <!--<test verbose="2" preserve-order="true"
-          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
-        <classes>
-            <class name="org.example.tests.RegistrationErrorValidationTest">
-                <methods>
-                    <include name="registrationErrorValidationWithNumericValue"/>
-                    <include name="registrationErrorWithAlphaNumeric"/>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
 </suite>
