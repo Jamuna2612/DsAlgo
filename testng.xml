@@ -4,9 +4,20 @@
     <listeners>
         <listener class-name="org.example.testComponents.Listeners"></listener>
     </listeners>
-    <parameter name="outputdir" value="test-output" />
     <test verbose="2" preserve-order="true"
-          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/ArrayValidationTest.java">
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/LoginValidationTest.java">
+        <classes>
+            <class name="org.example.tests.LoginValidationTest">
+                <methods>
+                    <include name="positiveLoginValidationTest"/>
+                    <include name="negativeLoginValidationTest"/>
+                    <include name="validatingClickOnLinkedList"/>
+                </methods>
+            </class>
+        </classes>
+    </test>    
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/ArrayValidationTest.java">
         <classes>
             <class name="org.example.tests.ArrayValidationTest">
                 <methods>
@@ -18,7 +29,7 @@
         </classes>
     </test>
     <test verbose="2" preserve-order="true"
-          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/GraphValidationTest.java">
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/GraphValidationTest.java">
         <classes>
             <class name="org.example.tests.GraphValidationTest">
                 <methods>
@@ -30,7 +41,7 @@
         </classes>
     </test>
 	<test verbose="2" preserve-order="true"
-          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
         <classes>
             <class name="org.example.tests.RegistrationErrorValidationTest">
                 <methods>
@@ -44,7 +55,7 @@
         </classes>
     </test>
     <test verbose="2" preserve-order="true"
-          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/RegistrationValidationTest.java">
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/RegistrationValidationTest.java">
         <classes>
             <class name="org.example.tests.RegistrationValidationTest">
                 <methods>

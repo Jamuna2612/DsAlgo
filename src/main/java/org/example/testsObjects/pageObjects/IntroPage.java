@@ -25,6 +25,13 @@ public class IntroPage {
     WebElement treeStructure;
 
 
+    @FindBy(xpath = "(//a[text()='Get Started'])[3]")
+    WebElement linkedList;
+
+    @FindBy(xpath = "(//a[text()='Get Started'])[6]")
+    WebElement tree;
+    @FindBy(xpath = "//a[text()='Introduction']")
+    WebElement intro;
     @FindBy(xpath = "//ul/a[3]")
     WebElement signOut;
 
@@ -38,6 +45,16 @@ public class IntroPage {
     WebElement alertDataMessage;
     
 
+    public void llClick() {
+        linkedList.click();
+    }
+
+    public void introClick(){
+        intro.click();
+    }
+    public void treeClick() {
+        tree.click();
+    }
     public void clickDsElement(){
         dataStructure.click();
     }

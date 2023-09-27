@@ -42,7 +42,7 @@ public class StepDefinitionImpl extends BaseTest {
     public GraphPage graphPage;
 
     @Given("User is in login page")
-    public void  User_is_in_login_page() throws IOException, InterruptedException {
+    public void User_is_in_login_page() throws IOException, InterruptedException {
         driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage.click();
@@ -67,7 +67,7 @@ public class StepDefinitionImpl extends BaseTest {
         Assert.assertTrue(actualLoginMessage.equalsIgnoreCase(string));
         driver.close();
     }
-    
+
     // registration steps. Can be moved to separate file if required
     @Given("User opens Register Page")
     public void openRegisterPage() throws IOException, InterruptedException {
@@ -347,7 +347,37 @@ public class StepDefinitionImpl extends BaseTest {
 	    	driver.close();
 	    	driver.quit();
     	}
+    }
     	
     	 		
+    @Given("User is in intro page")
+    public void user_is_in_intro_page() throws IOException, InterruptedException {
+        driver = initializeDriver();
+        WelcomePage welcomePage = new WelcomePage(driver);
+        welcomePage.click();
+        loginPage = welcomePage.login();
+        loginPage.loginDataClick("james", "apple@123");
+        introPage = loginPage.submit();
+    }
+
+    @When("user click linkedList")
+    public void user_click_linked_list() {
+        introPage.llClick();
+    }
+
+    @Then("click intro link")
+    public void click_intro_link() {
+        introPage.introClick();
+    }
+
+    @Then("navigate back to intro page")
+    public void navigate_back_to_intro_page() {
+        navigateBack(2);
+    }
+
+    @And("click tree link")
+    public void clickTreeLink() {
+        introPage.treeClick();
+        driver.quit();
     }
 }
