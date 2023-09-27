@@ -24,10 +24,24 @@ public class IntroPage {
     @FindBy(xpath = "(//a[text()='Get Started'])[3]")
     WebElement linkedList;
 
+    @FindBy(xpath = "//a[text()='Types of Linked List']")
+    WebElement typesLinkedList;
     @FindBy(xpath = "(//a[text()='Get Started'])[6]")
     WebElement tree;
     @FindBy(xpath = "//a[text()='Introduction']")
     WebElement intro;
+
+    @FindBy(xpath = "//a[text()='Creating Linked LIst']")
+    WebElement creatingLinkedList;
+
+    public void clickOnCreatingLL(){
+        creatingLinkedList.click();
+    }
+    @FindBy(xpath = "//a[text()='Overview of Trees']")
+    WebElement overviewOfTree;
+
+    @FindBy(xpath = "//a[text()='Try here>>>']")
+    WebElement tryHere;
     @FindBy(xpath = "//ul/a[3]")
     WebElement signOut;
 
@@ -37,6 +51,21 @@ public class IntroPage {
     @FindBy(css = "div[class*='alert-primary']")
     WebElement invalidDataMessage;
 
+    @FindBy(xpath = "//button[text()='Run']")
+    WebElement run;
+
+    public void clickOnTree(){
+        overviewOfTree.click();
+    }
+    public void runButton(){
+        run.click();
+    }
+    public void tryOnClick(){
+        tryHere.click();
+    }
+    public void typesOfLL(){
+        typesLinkedList.click();
+    }
     public void llClick() {
         linkedList.click();
     }
@@ -65,8 +94,7 @@ public class IntroPage {
     }
 
     public String signOutErrorMessage(){
-        String message = invalidDataMessage.getText();
-        return message;
+        return invalidDataMessage.getText();
     }
 
 

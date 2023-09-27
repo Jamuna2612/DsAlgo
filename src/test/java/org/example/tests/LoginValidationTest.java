@@ -4,7 +4,10 @@ import org.example.testComponents.BaseTest;
 import org.example.testsObjects.pageObjects.IntroPage;
 import org.example.testsObjects.pageObjects.LoginPage;
 import org.example.testsObjects.pageObjects.WelcomePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -42,7 +45,7 @@ public class LoginValidationTest extends BaseTest {
         welcomePage.click();
         LoginPage loginPage = welcomePage.login();
 
-         loginPage.loginDataClick(userName, pswd);
+        loginPage.loginDataClick(userName, pswd);
         IntroPage introPage = loginPage.submit();
 
         String actualMessage = introPage.signOutErrorMessage();
@@ -62,10 +65,18 @@ public class LoginValidationTest extends BaseTest {
 
         introPage.llClick();
         introPage.introClick();
-
+        introPage.tryOnClick();
+        actionMethod();
+        introPage.runButton();
         navigateBack(2);
-        introPage.treeClick();
-        introPage.signOutClick();
+
+        introPage.clickOnCreatingLL();
+        introPage.tryOnClick();
+        actionMethod();
+        introPage.runButton();
+        driver.quit();
+
+
     }
 
     @DataProvider
