@@ -107,7 +107,7 @@ public class StepDefinitionImpl extends BaseTest {
     		Random random = new Random();
     		// valid password is min 8 char long so choosing invalid char length from 1 to 7
     		// can't take 0, as it is empty password usercase, which is separate test case
-    		int length = random.nextInt(1,7);
+    		int length = random.nextInt(7);
     		registerPage.generatePassword(length, passwordType);
     	}
     	else {
