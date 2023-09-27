@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.8.0</version>
+            <version>7.7.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -60,50 +60,36 @@
 
 
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
-		<dependency>
-		    <groupId>io.cucumber</groupId>
-		    <artifactId>cucumber-java</artifactId>
-		    <version>7.13.0</version>
-		</dependency>        
-        <!-- <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>7.12.1</version>
-            <scope>test</scope> 
-        </dependency> -->
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>7.13.0</version>
-        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
-        <!-- <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>1.2.6</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency> -->
-        
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-		<dependency>
-		    <groupId>io.cucumber</groupId>
-		    <artifactId>cucumber-junit</artifactId>
-		    <version>7.13.0</version>
-		    <scope>test</scope>
-		</dependency>        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.28</version>
         </dependency>
-		<dependency>
-		    <groupId>io.qameta.allure</groupId>
-		    <artifactId>allure-cucumber7-jvm</artifactId>
-		    <version>2.24.0</version>
-		</dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.14.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.6</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.12.1</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
     <profiles>
         <profile>
@@ -117,13 +103,9 @@
                             <artifactId>maven-surefire-plugin</artifactId>
                             <version>3.1.2</version>
                             <configuration>
-				                <systemPropertyVariables>
-				                    <!-- Specify the Cucumber tags using the cucumber.filter.tags property -->
-				                    <cucumber.filter.tags>@arrayNoLoginError</cucumber.filter.tags>
-				                </systemPropertyVariables>								
-                               <!-- <suiteXmlFiles>
+                                <suiteXmlFiles>
                                     <suiteXmlFile>testng.xml</suiteXmlFile>
-                                </suiteXmlFiles> -->
+                                </suiteXmlFiles>
                             </configuration>
                         </plugin>
 
