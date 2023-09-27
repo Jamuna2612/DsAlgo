@@ -4,26 +4,54 @@
     <listeners>
         <listener class-name="org.example.testComponents.Listeners"></listener>
     </listeners>
+    <parameter name="outputdir" value="test-output" />
     <test verbose="2" preserve-order="true"
-          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/LoginValidationTest.java">
+          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/ArrayValidationTest.java">
         <classes>
-            <class name="org.example.tests.LoginValidationTest">
+            <class name="org.example.tests.ArrayValidationTest">
                 <methods>
-                    <include name="positiveLoginValidationTest"/>
-                    <include name="negativeLoginValidationTest"/>
+                    <include name="noLoginArrayPageTest"/>
+                    <include name="arrayTopicWithLoginString"/>
+                    <include name="testArraysPageTopics"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <!--<test verbose="2" preserve-order="true"
-          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/GraphValidationTest.java">
         <classes>
-            <class name="org.example.tests.RegistrationErrorValidationTest">
+            <class name="org.example.tests.GraphValidationTest">
                 <methods>
-                    <include name="registrationErrorValidationWithNumericValue"/>
-                    <include name="registrationErrorWithAlphaNumeric"/>
+                    <include name="noLoginGraphPageTest"/>
+                    <include name="graphTopicWithLogin"/>
+                    <include name="testGraphPageTopics"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
+	<test verbose="2" preserve-order="true"
+          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/RegistrationErrorValidationTest.java">
+        <classes>
+            <class name="org.example.tests.RegistrationErrorValidationTest">
+                <methods>
+                    <include name="numbersOnlyPasswordRegisterError"/>
+                    <include name="passwordMismatchRegisterError"/>
+                    <include name="longUserNameRegisterError"/>
+                    <include name="invalidSpecialCharUsernameRegisterError"/>
+                    <include name="shortPasswordRegisterError"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/swapp/eclipse-workspace/DsAlgo/src/test/java/org/example/tests/RegistrationValidationTest.java">
+        <classes>
+            <class name="org.example.tests.RegistrationValidationTest">
+                <methods>
+                    <include name="registerValidation"/>
+                    <include name="registerValidationWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
