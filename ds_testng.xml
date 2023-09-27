@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+
+ 
+ <listeners>
+        <listener class-name="org.example.testComponents.Listeners"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true"
+          name="/Users/magizh/Documents/DsAlgo/src/test/java/org/example/tests/DSIntroValidationTest.java">
+        <classes>
+            <class name="org.example.tests.DSIntroValidationTest">
+                <methods>
+                    <include name="noLoginDSIntroPageTest"/>
+                   	<include name="tryEditorFlowForDSIntro"></include>
+                  
+                </methods>
+            </class>
+        </classes>
+    </test>
+      <test verbose="2" preserve-order="true"
+          name="/Users/magizh/Documents/DsAlgo/src/test/java/org/example/tests/StackValidationTest.java">
+        <classes>
+            <class name="org.example.tests.StackValidationTest">
+                <methods>
+                    <include name="noLoginDSIntroPageTest"/>
+                   	<include name="tryEditorFlowForStack"></include>
+                  
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->
