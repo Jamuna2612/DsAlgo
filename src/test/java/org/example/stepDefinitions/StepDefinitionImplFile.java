@@ -13,7 +13,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
-public class StepDefinitionImpl extends BaseTest {
+public class StepDefinitionImplFile extends BaseTest {
 
     public WebDriver driver;
     public LoginPage loginPage;
