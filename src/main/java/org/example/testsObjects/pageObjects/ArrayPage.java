@@ -78,23 +78,6 @@ public class ArrayPage {
 	
 	public void clickArrayTopic(String topicLinkStr) {
 		scrollToElementAndClick(topicLinkStr);
-//		WebElement tempElement = null;
-//		if (topicTitle == "Arrays in Python") {
-//			tempElement = waitAndGetElement(arraysInPythonTopicPath);			
-//		}
-//		else if (topicTitle == "Arrays Using List") {
-//			tempElement = waitAndGetElement(arraysUsingLinkedListTopicPath);
-//		}
-//		else if (topicTitle == "Basic Operations in Lists") {
-//			tempElement = waitAndGetElement(basicOpenrationsInListTopicPath);
-//		}
-//		else if (topicTitle == "Applications of Array") {
-////			tempElement = waitAndGetElement(applicationsOfArrayTopicPath);
-////		}
-//		
-//		if (tempElement != null) {
-//			tempElement.click();
-//		}
 	}
 	
 	public void clickGetStarted() {

@@ -115,7 +115,11 @@ public class ArrayValidationTest extends BaseTest {
         	{"mike555", "Open4You", "Arrays in Python", "pythonCodeError"},
         	{"mike555", "Open4You", "Arrays in Python", "pythonCodeSuccess"},
         	{"mike555", "Open4You", "Arrays Using List", "pythonCodeSuccess"},
-        	{"mike555", "Open4You", "Arrays Using List", "pythonCodeError"}
+        	{"mike555", "Open4You", "Arrays Using List", "pythonCodeError"},
+        	{"mike555", "Open4You", "Basic Operations in Lists", "pythonCodeSuccess"},
+        	{"mike555", "Open4You", "Basic Operations in Lists", "pythonCodeError"},
+        	{"mike555", "Open4You", "Applications of Array", "pythonCodeSuccess"},
+        	{"mike555", "Open4You", "Applications of Array", "pythonCodeError"}       	
         	};
     }
     

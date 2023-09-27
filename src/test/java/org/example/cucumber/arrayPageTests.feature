@@ -49,7 +49,31 @@ Feature: Array page test scenarios
     @topic2ErrorOutput
     Examples: Arrays Using List topic link with code run error
     | username | password | pythonCodeType    | topicLink         |
-    | mike555  | Open4You | pythonCodeError   | Arrays Using List |     
+    | mike555  | Open4You | pythonCodeError   | Arrays Using List |    
+    
+    @topic3SuccessOutput
+    @newTest
+    Examples: Arrays Using List topic link code run success
+    | username | password | pythonCodeType    | topicLink                 |
+    | mike555  | Open4You | pythonCodeSuccess | Basic Operations in Lists |
+    
+    @topic3ErrorOutput
+    @newTest
+    Examples: Arrays Using List topic link with code run error
+    | username | password | pythonCodeType    | topicLink                 |
+    | mike555  | Open4You | pythonCodeError   | Basic Operations in Lists | 
+    
+    @topic4SuccessOutput
+    @newTest
+    Examples: Arrays Using List topic link code run success
+    | username | password | pythonCodeType    | topicLink             |
+    | mike555  | Open4You | pythonCodeSuccess | Applications of Array |
+    
+    @topic4ErrorOutput
+    @newTest
+    Examples: Arrays Using List topic link with code run error
+    | username | password | pythonCodeType    | topicLink             |
+    | mike555  | Open4You | pythonCodeError   | Applications of Array |          
      
     
     
