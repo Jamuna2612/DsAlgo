@@ -30,4 +30,15 @@
             </class>
         </classes>
     </test>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/LoginValidationTest.java">
+        <classes>
+            <class name="org.example.tests.LoginValidationTest">
+                <methods>
+                    <include name="positiveLoginValidationTest"/>
+                    <include name="negativeLoginValidationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite> <!-- Suite -->
