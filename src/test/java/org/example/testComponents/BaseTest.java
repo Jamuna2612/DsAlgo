@@ -25,7 +25,7 @@ public class BaseTest {
         properties.load(fis);
         String browserValue = System.getProperty("browser") != null ? System.getProperty("browser") : properties.getProperty("browser");
         if (browserValue.equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\jamun\\IdeaProjects\\Practice\\src\\test\\resources\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\swapp\\\\Downloads\\\\driver\\\\chromedriver.exe");
             driver = new ChromeDriver();
         } else if (browserValue.equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", "C:\\Users\\jamun\\IdeaProjects\\Practice\\src\\test\\resources\\geckodriver.exe");
