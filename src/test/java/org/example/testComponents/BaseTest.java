@@ -1,11 +1,13 @@
 package org.example.testComponents;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,6 +52,11 @@ public class BaseTest {
         return System.getProperty("user.dir")+ "//reports//"+ testcaseName+".png";
     }
 
+    public void actionMethod(){
+        Actions action = new Actions(driver);
+        action.keyDown(Keys.ENTER).sendKeys("print").sendKeys(Keys.SPACE).sendKeys("\"Hello\"").sendKeys(Keys.ENTER).perform();
+
+    }
     public void navigateBack(int noOfTimes){
         for (int i = 0; i < noOfTimes; i++) {
             driver.navigate().back();
