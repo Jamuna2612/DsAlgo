@@ -15,7 +15,21 @@
                 </methods>
             </class>
         </classes>
-    </test>    
+    </test>
+
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/TreeValidationTest.java">
+        <classes>
+            <class name="org.example.tests.TreeValidationTest">
+                <methods>
+                    <include name="validatingClickOnTreeStructure"/>
+                    <include name="validatingClickOnTreeLinks"/>
+                    <include name="validatingClickOnTreeTypes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test verbose="2" preserve-order="true"
           name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/ArrayValidationTest.java">
         <classes>
