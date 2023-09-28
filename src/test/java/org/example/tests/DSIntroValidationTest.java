@@ -34,7 +34,8 @@ public class DSIntroValidationTest extends BaseTest {
 	public void noLoginDSIntroPageTest() throws IOException, InterruptedException {
         driver = initializeDriver();
         WelcomePage welcomePage = new WelcomePage(driver);
-        IntroPage introPage = welcomePage.click();
+        welcomePage.click();
+        //IntroPage introPage = welcomePage.click();
         
         //introPage.getStartedHome_ds();
         
