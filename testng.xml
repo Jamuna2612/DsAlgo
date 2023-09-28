@@ -65,4 +65,27 @@
             </class>
         </classes>
     </test>
+
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/DSIntroValidationTest.java">
+        <classes>
+            <class name="org.example.tests.DSIntroValidationTest">
+                <methods>
+                    <include name="noLoginDSIntroPageTest"/>
+                    <include name="tryEditorFlowForDSIntro"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/jamun/DsAlgo/src/test/java/org/example/tests/StackValidationTest.java">
+        <classes>
+            <class name="org.example.tests.StackValidationTest">
+                <methods>
+                    <include name="noLoginDSIntroPageTest"/>
+                    <include name="tryEditorFlowForStack"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
